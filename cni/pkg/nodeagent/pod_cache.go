@@ -49,6 +49,12 @@ type WorkloadInfo struct {
 
 var _ PodNetnsCache = &podNetnsCache{}
 
+type PodCache = podNetnsCache
+
+func NewPodNetnsCache(openNetns func(nspath string) (NetnsCloser, error)) *PodCache {
+	return newPodNetnsCache(openNetns)
+}
+
 func newPodNetnsCache(openNetns func(nspath string) (NetnsCloser, error)) *podNetnsCache {
 	return &podNetnsCache{
 		openNetns:       openNetns,

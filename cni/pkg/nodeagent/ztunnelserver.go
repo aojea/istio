@@ -119,6 +119,10 @@ type ztunnelServer struct {
 
 var _ ZtunnelServer = &ztunnelServer{}
 
+func NewZtunnelServer(addr string, pods PodNetnsCache, keepaliveInterval time.Duration) (*ztunnelServer, error) {
+	return newZtunnelServer(addr, pods, keepaliveInterval)
+}
+
 func newZtunnelServer(addr string, pods PodNetnsCache, keepaliveInterval time.Duration) (*ztunnelServer, error) {
 	if addr == "" {
 		return nil, fmt.Errorf("addr cannot be empty")
